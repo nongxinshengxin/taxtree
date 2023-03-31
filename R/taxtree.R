@@ -67,7 +67,9 @@ find_Lineage<-function(nodename,level=3){
     tibble_tree[i,1]<-tax_child2parent[which(tax_child2parent$child_id==as.character(tax_child2parent[i,2])),3]
   }
 
-  tree<-as.treedata(tibble_tree)%>%as.phylo()
+  tree<-as.phylo(tibble_tree)
+  treetext<-write.tree(tree,"")
+  tree<-read.tree(text=treetext)
 
   return(tree)
 }
@@ -86,14 +88,13 @@ find_Lineage<-function(nodename,level=3){
 #' @importFrom readr read_delim
 #' @importFrom dplyr `%>%` filter left_join select rename_with add_row distinct
 #' @importFrom tibble tibble
+#' @importFrom ape write.tree
 #'
 #' @examples
 make_Taxtree<-function(file,header=FALSE){
   data(names.dmp)
   data(nodes)
   listfile<-read_delim(file=file,col_names = header,delim = "\t")%>%rename_with(~"name",1)
-  print(class(listfile))
-  print(class(nodes))
   name2id<-listfile%>%left_join(names.dmp)
   emptyid<-c()
   emptyup<-c()
@@ -118,7 +119,9 @@ make_Taxtree<-function(file,header=FALSE){
     }
   }
 
-  tree<-as.treedata(tibble_tree)%>%as.phylo()
+  tree<-as.phylo(tibble_tree)
+  treetext<-write.tree(tree,"")
+  tree<-read.tree(text=treetext)
 
   return(tree)
 }
