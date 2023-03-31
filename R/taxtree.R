@@ -123,7 +123,7 @@ make_Taxtree<-function(file,header=FALSE){
     if (length(which(tax_child2parent$child_id==as.character(tax_child2parent[i,2])))!=0){
       tibble_tree[i,1]<-tax_child2parent[which(tax_child2parent$child_id==as.character(tax_child2parent[i,2])),3]
     }else{
-      tibble_tree[i,1]<-tibble_tree[i,2]
+      tibble_tree[i,1]<-"root"
     }
   }
 
