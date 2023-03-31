@@ -34,6 +34,7 @@ maketibble<-function(testid){
 #' @return
 #' @export
 #'
+#' @importFrom ape write.tree
 #' @importFrom tidytree as.treedata as.phylo
 #' @importFrom tibble tibble
 #' @importFrom tidyr drop_na
