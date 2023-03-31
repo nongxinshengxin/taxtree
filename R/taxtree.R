@@ -34,6 +34,7 @@ maketibble<-function(testid){
 #' @return
 #' @export
 #'
+#' @importFrom ggtree ggtree
 #' @importFrom ape write.tree
 #' @importFrom tidytree as.treedata as.phylo
 #' @importFrom tibble tibble
@@ -90,6 +91,7 @@ find_Lineage<-function(nodename,level=3){
 #' @importFrom dplyr `%>%` filter left_join select rename_with add_row distinct
 #' @importFrom tibble tibble
 #' @importFrom ape write.tree
+#' @importFrom ggtree ggtree
 #'
 #' @examples
 make_Taxtree<-function(file,header=FALSE){
