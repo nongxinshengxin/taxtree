@@ -159,7 +159,7 @@ plot_taxTree<-function(treefile,clade_group=c(),module=1){
       geom_tiplab(fontface = "bold.italic",size=3.5)+
       xlim(c(0, 35))
   }else{
-    tree <- groupClade(tree, .node = clade_group)
+    treefile <- groupClade(treefile, .node = clade_group)
     p0<-ggtree(treefile, aes(color=group), branch.length = 'none', layout = modulevector[module],ladderize=F,size=0.1) +
       geom_tiplab(fontface = "bold.italic",size=3.5)+
       xlim(c(0, 35))+theme_inset(legend.position = "none")
