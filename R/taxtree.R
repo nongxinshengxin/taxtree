@@ -28,6 +28,7 @@ maketibble<-function(testid){
 
 #' Title
 #' @description
+#'
 #' @param nodename
 #' @param level a number,
 #'
@@ -68,6 +69,10 @@ find_Lineage<-function(nodename,level=3){
   for (i in 1:nrow(tax_child2parent)){
     tibble_tree[i,1]<-tax_child2parent[which(tax_child2parent$child_id==as.character(tax_child2parent[i,2])),3]
   }
+
+  tibble_tree<-mutate(tibble_tree,parent=gsub("[\\'\\(\\)]*","",tibble_tree$parent),
+                      node=gsub("[\\'\\(\\)]*","",tibble_tree$node),
+                      label=gsub("[\\'\\(\\)]*","",tibble_tree$label))
 
   tree<-as.phylo(tibble_tree)
   treetext<-write.tree(tree,"")
@@ -122,6 +127,10 @@ make_Taxtree<-function(file,header=FALSE){
     }
   }
 
+  tibble_tree<-mutate(tibble_tree,parent=gsub("[\\'\\(\\)]*","",tibble_tree$parent),
+                      node=gsub("[\\'\\(\\)]*","",tibble_tree$node),
+                      label=gsub("[\\'\\(\\)]*","",tibble_tree$label))
+
   tree<-as.phylo(tibble_tree)
   treetext<-write.tree(tree,"")
   tree<-read.tree(text=treetext)
@@ -135,21 +144,23 @@ make_Taxtree<-function(file,header=FALSE){
 #'
 #' @param treefile
 #' @param clade_group
+#' @param module
 #'
 #' @return a figure as ggtree object
 #' @export
 #'
-#' @importFrom ggtree ggtree groupClade
+#' @import ggtree
 #'
 #' @examples
-plot_taxTree<-function(treefile,clade_group=c()){
+plot_taxTree<-function(treefile,clade_group=c(),module=1){
+  modulevector<-c("rectangular","ellipse","circular")
   if (length(clade_group)==0){
-    p0<-ggtree(treefile, branch.length = 'none', layout = "ellipse",ladderize=F,size=0.1) +
+    p0<-ggtree(treefile, branch.length = 'none', layout = modulevector[module],ladderize=F,size=0.1) +
       geom_tiplab(fontface = "bold.italic",size=3.5)+
       xlim(c(0, 35))
   }else{
     tree <- groupClade(tree, .node = clade_group)
-    p0<-ggtree(treefile, aes(color=group), branch.length = 'none', layout = "ellipse",ladderize=F,size=0.1) +
+    p0<-ggtree(treefile, aes(color=group), branch.length = 'none', layout = modulevector[module],ladderize=F,size=0.1) +
       geom_tiplab(fontface = "bold.italic",size=3.5)+
       xlim(c(0, 35))+theme_inset(legend.position = "none")
   }
