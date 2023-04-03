@@ -38,6 +38,12 @@ devtools::install_github("nongxinshengxin/taxtree")
 - **plot_taxTree()**  Drawing a simple Taxonomy tree based on the `ggtree` package.
 - **write_taxTree()**  This function writes in a file a tree in parenthetic format using the Newick format, based on `ape` packages.
 
+## Application
+- Species annotation based on OTUs, allowing the construction of their phylogenetic topology based on the names of taxa obtained from the annotation, using the make_Taxtree() function;
+- Conducting taxonomic studies. Curious about the close relatives of humans under the order Primates? find_Lineage("Primates") is a one-line command that will give you the answer;
+- Border Phylum Order Family Genus Species, classification is just too complicated. name2rank(), name2rank_str(), just provide the name of the taxa and it will tell you its taxonomic rank;
+- Super linkage. `taxtree` is based on the Taxonomy database and can be linked to **TaxonKit software**; also, taxtree generates S3 phylo classes, which are commonly used to store phylogenetic trees in R. The tree can be easily embellished in depth using the `ggtree` package. The tree can also be output via write_taxTree(), combined with the <a href="https://github.com/TongZhou2017/itol.toolkit">**itol.toolkit package**</a> and embellished with iTOL.
+
 ## Reference
 Hadley Wickham. https://github.com/tidyverse/tidyverse
 
