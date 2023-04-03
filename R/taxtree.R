@@ -46,6 +46,9 @@ find_Lineage<-function(nodename,level=1){
   data(names.dmp)
   data(nodes)
   nodename<-as.character(filter(names.dmp,name==nodename)[1])
+  if (nodename=="numeric(0)"){
+    stop("Stop here! The taxon name input is not in database")
+  }
   level1<-filter(nodes[1:2],up==nodename)
   level2<-level1%>%left_join(nodes[1:2],by=c("ID"="up"))%>%select(3,1)%>%rename_with(~c("ID","up"),1:2)%>%drop_na()
   level3<-level2%>%left_join(nodes[1:2],by=c("ID"="up"))%>%select(3,1)%>%rename_with(~c("ID","up"),1:2)%>%drop_na()
