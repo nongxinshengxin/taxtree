@@ -6,8 +6,8 @@
 \usage{
 plot_taxTree(
   treefile,
-  clade_group = c(),
-  module = 1)
+  module = 1，
+  clade_group = c())
 }
 \arguments{
 \item{treefile}{phylo object}

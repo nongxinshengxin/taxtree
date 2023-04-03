@@ -11,10 +11,10 @@ Description: The Taxonomy Database is a curated classification and nomenclature
     https://www.ncbi.nlm.nih.gov/taxonomy 
     and the public data download address is 
     https://ftp.ncbi.nih.gov/pub/taxonomy/.
-    `taxtree` is used to generate a topology of species 
-    evolutionary relationships based on the Taxonomy database by 
+    `taxtree` is used to generate a hylogenetic topology 
+    of taxa based on the Taxonomy database by 
     processing `names.dmp` and `nodes.dmp` and drawing simple 
-    evolutionary trees based on the hierarchy of species classification.
+    evolutionary trees based on the hierarchy of taxa.
     The implementation of `taxtree` function relies on `tidyverse` and `ggtree`.
 License: What license is it under?
 Encoding: UTF-8

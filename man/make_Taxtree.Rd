@@ -2,16 +2,16 @@
 % Please edit documentation in R/taxtree.R
 \name{make_Taxtree}
 \alias{make_Taxtree}
-\title{Construct their categorised topology from the list of node names.}
+\title{Construct their categorised topology from the list of taxa names.}
 \usage{
 make_Taxtree(file, header = FALSE)
 }
 \arguments{
-\item{file}{the name of the file which the data are to be read from.This file contains the names of all the nodes for which you want to build a classification topology. Each line is a separate node name.}
+\item{file}{the name of the file which the data are to be read from.This file contains the names of all the taxa for which you want to build a taxonomic topology. Each line is a separate taxon name.}
 \item{header}{a logical value indicating whether the file contains the names of the variables as its first line. If missing, the value is determined from the file format: header is set to TRUE if and only if the first row contains one fewer field than the number of columns. Default is FALSE}
 }
 \description{
-If you have some definite node names (either Kingdom Phylum Class Order Family Genus Species or any other taxonomic node), you can use this function to construct their taxonomic topology from a list of node names.
+If you have some definite taxa names (either Kingdom Phylum Class Order Family Genus Species or any other taxonomic node), you can use this function to construct their taxonomic topology from a list of taxa names.
 }
 \references{
 \url{https://github.com/nongxinshengxin/taxtree}

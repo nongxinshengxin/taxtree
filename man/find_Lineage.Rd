@@ -4,12 +4,14 @@
 \alias{find_Lineage}
 \title{By an explicit taxonomic node name, all taxonomic lineages under that node are found.}
 \usage{
-find_Lineage(nodename, level = 3)
+find_Lineage(nodename, level = 1)
 }
 \arguments{
 \item{nodename}{the name of the node.}
+\item{level}{a number, that is the number of levels you want to expand, i.e. how many levels of categorical relationships you want to obtain for all the lineages under this definite node. A maximum of 5 levels can be expanded. The default is 1.}
 }
-\item{level}{a number, that is the number of levels you want to expand, i.e. how many levels of categorical relationships you want to obtain for all the lineages under this definite node. A maximum of 5 levels can be expanded. The default is 3.}
+\value{
+Finally, return a list.`[[1]]`is a S3 class for the phylogenetic tree. `[[2]]`is a dataframe showing the correspondence between parent and child nodes
 }
 \description{
 By an explicit taxonomic node name, all taxonomic lineages under that node are found.
