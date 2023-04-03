@@ -3,7 +3,7 @@
 The **Taxonomy Database** is a curated classification and nomenclature for all of the organisms in the public sequence databases. This currently represents about 10% of the described species of life on the planet. The official address for the NCBI Taxonomy database is https://www.ncbi.nlm.nih.gov/taxonomy and the public data download address is https://ftp.ncbi.nih.gov/pub/taxonomy/. `taxtree` is used to generate a a phylogenetic topology of taxonomic units (taxa) based on the Taxonomy database by processing **names.dmp** and **nodes.dmp** and drawing simple evolutionary trees based on the hierarchy of taxa. The implementation of `taxtree` function relies on `tidyverse` and `ggtree`.
 | Ranks | higher taxa | genus | species | lower taxa | total |
 |--|--|--|--|--|--|
-| Archaea | 610 | 264 | 878 | 0 | 1752|
+| Archaea | 610 | 264 | 878 | 0 | 1,752|
 | Bacteria | 5,897 | 5,005 | 24,761 | 952 | 36,615 |
 | Eukaryota | 67,028 | 98,600 | 515,880 | 36,640 | 718,148 |
 | Fungi | 6,009 | 7,437 | 55,840 | 1,571 | 70,857 |
