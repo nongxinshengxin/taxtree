@@ -107,6 +107,12 @@ make_Taxtree<-function(file,header=FALSE){
   data(nodes)
   listfile<-read_delim(file=file,col_names = header,delim = "\t")%>%rename_with(~"name",1)
   name2id<-listfile%>%left_join(names.dmp)
+  for (i in 1:nrow(name2id)){
+    if (is.na(name2id[i,2])){
+      warning(paste(as.character(name2id[i,1]),"is not in database"))
+    }
+  }
+  name2id<-drop_na(name2id)
   emptyid<-c()
   emptyup<-c()
   for (i in 1:nrow(name2id)){
