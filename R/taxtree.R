@@ -32,7 +32,7 @@ maketibble<-function(testid){
 #' @param nodename
 #' @param level a number,
 #'
-#' @return
+#' @return result_list
 #' @export
 #'
 #' @importFrom ggtree ggtree
@@ -42,7 +42,7 @@ maketibble<-function(testid){
 #' @importFrom tidyr drop_na
 #' @importFrom dplyr `%>%` filter left_join select rename_with add_row distinct
 #' @examples
-find_Lineage<-function(nodename,level=3){
+find_Lineage<-function(nodename,level=1){
   data(names.dmp)
   data(nodes)
   nodename<-as.character(filter(names.dmp,name==nodename)[1])
@@ -74,11 +74,14 @@ find_Lineage<-function(nodename,level=3){
                       node=gsub("[\\'\\(\\)]*","",tibble_tree$node),
                       label=gsub("[\\'\\(\\)]*","",tibble_tree$label))
 
+
   tree<-as.phylo(tibble_tree)
   treetext<-write.tree(tree,"")
   tree<-read.tree(text=treetext)
 
-  return(tree)
+  tax_child2parent<-tax_child2parent%>%rename_with(~"childName",3)%>%left_join(names.dmp,by=c("parent_id"="ID"))%>%select(3,4)%>%rename_with(~"parentName",2)
+  result_list<-list(tree,tax_child2parent)
+  return(result_list)
 }
 
 
@@ -142,6 +145,41 @@ make_Taxtree<-function(file,header=FALSE){
 
 #' Title
 #'
+#' @param file
+#' @param header
+#'
+#' @return
+#' @export
+#'
+#' @examples
+name2rank<-function(file,header=FALSE){
+  data(names.dmp)
+  data(nodes)
+  listfile<-read_delim(file=file,col_names = header,delim = "\t")%>%rename_with(~"name",1)
+  name2rank<-listfile%>%left_join(names.dmp)%>%left_join(nodes)%>%select(name,ID,rank)%>%rename_with(~"taxid",2)
+  return(name2rank)
+}
+
+
+#' Title
+#'
+#' @param nodenames
+#'
+#' @return
+#' @export
+#'
+#' @examples
+name2rank_str<-function(nodenames){
+  data(names.dmp)
+  data(nodes)
+  listfile<-tibble(nodenames)%>%rename_with(~"name",1)
+  name2rank<-listfile%>%left_join(names.dmp)%>%left_join(nodes)%>%select(name,ID,rank)%>%rename_with(~"taxid",2)
+  return(name2rank)
+}
+
+
+#' Title
+#'
 #' @param treefile
 #' @param clade_group
 #' @param module
@@ -152,7 +190,7 @@ make_Taxtree<-function(file,header=FALSE){
 #' @import ggtree
 #'
 #' @examples
-plot_taxTree<-function(treefile,clade_group=c(),module=1){
+plot_taxTree<-function(treefile,module=1,clade_group=c()){
   modulevector<-c("rectangular","ellipse","circular")
   if (length(clade_group)==0){
     p0<-ggtree(treefile, branch.length = 'none', layout = modulevector[module],ladderize=F,size=0.1) +
@@ -160,9 +198,11 @@ plot_taxTree<-function(treefile,clade_group=c(),module=1){
       xlim(c(0, 35))
   }else{
     treefile <- groupClade(treefile, .node = clade_group)
+    grouptable<-as_tibble(treefile)
     p0<-ggtree(treefile, aes(color=group), branch.length = 'none', layout = modulevector[module],ladderize=F,size=0.1) +
       geom_tiplab(fontface = "bold.italic",size=3.5)+
-      xlim(c(0, 35))+theme_inset(legend.position = "none")
+      scale_colour_discrete(name="CladeGroup",labels=c("Others",clade_group))+
+      xlim(c(0, 35))
   }
   return(p0)
 }
