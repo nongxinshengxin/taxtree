@@ -1,4 +1,4 @@
-# taxtree
+# taxtree <img src="image/TAXTREE.png" align="right" alt="taxtree logo" style="height: 140px;">
 ## Overview
 The **Taxonomy Database** is a curated classification and nomenclature for all of the organisms in the public sequence databases. This currently represents about 10% of the described species of life on the planet. The official address for the NCBI Taxonomy database is https://www.ncbi.nlm.nih.gov/taxonomy and the public data download address is https://ftp.ncbi.nih.gov/pub/taxonomy/. `taxtree` is used to generate a a phylogenetic topology of taxonomic units (taxa) based on the Taxonomy database by processing **names.dmp** and **nodes.dmp** and drawing simple evolutionary trees based on the hierarchy of taxa. The implementation of `taxtree` function relies on `tidyverse` and `ggtree`.
 ## Installation
